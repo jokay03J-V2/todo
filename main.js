@@ -1,12 +1,15 @@
-import './style.css'
-import { setupTodos } from './todos'
+import "./style.css";
+import { setupTodos } from "./todos";
 
-document.querySelector('#app').innerHTML = `
+document.querySelector("#app").innerHTML = `
   <div>
     <h1>todo-list</h1>
     <div id="container">
-      <input id="inputs"></input>
-      <div id="todos"></div>
+      <div class="inputs">
+        <input id="inputs"></input>
+        <button id="send">ajouter</button>
+      </div>
+      <div class="todos_container"><ul id="todos"></ul></div>
       <div id="buttons">
       <button id="done">done</button>
       <button id="todo">todo</button>
@@ -14,11 +17,13 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div>
   </div>
-`
+`;
 
 setupTodos({
   input: document.getElementById("inputs"),
   todos: document.getElementById("todos"),
   done: document.getElementById("done"),
-  todo: document.getElementById("todo")
-})
+  todo: document.getElementById("todo"),
+  send: document.getElementById("send"),
+  all: document.getElementById("all"),
+});
