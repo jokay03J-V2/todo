@@ -31,15 +31,17 @@ jobs:
         uses: actions/setup-node@v3.4.1
       - name: install dependency
         run: "npm i"
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: build site
+        run: "npm run build"
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          source: ./
-          destination: ./dist
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./out
+        - uses: peaceiris/actions-gh-pages@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./dist  #
 
   # Deployment job
   deploy:
