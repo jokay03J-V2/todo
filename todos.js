@@ -9,39 +9,46 @@ export const setupTodos = ({ input, todos, done, todo, send, all }) => {
     input.value = "";
 
     renderList(todosList, todos);
-  done.addEventListener("click", () => {
-    todos.innerHTML = "";
-    renderList(todosList.filter((todo) => todo.checked), todos);
+    done.addEventListener("click", () => {
+      todos.innerHTML = "";
+      renderList(
+        todosList.filter((todo) => todo.checked),
+        todos
+      );
+    });
   });
 
   todo.addEventListener("click", () => {
     todos.innerHTML = "";
-      renderList(todosList.filter((todo) => todo.checked === false),todos)
+    renderList(
+      todosList.filter((todo) => todo.checked === false),
+      todos
+    );
   });
 
   all.addEventListener("click", () => {
     todos.innerHTML = "";
-    renderList(todosList,todos);
+    renderList(todosList, todos);
   });
-};
 
-function renderList(todosList,todos_container) {
+  function renderList(todosList, todos_container) {
     todos.innerHTML = "";
-    todosList
-        .map((todo, index) => {
-        todos_container.innerHTML += `
+    todosList.map((todo, index) => {
+      todos_container.innerHTML += `
                 <li class="todos">
-                    <input type="checkbox" id="todo-${index}" ${todosList[index].checked ? "checked" : ""}>
+                    <input type="checkbox" id="todo-${index}" ${
+        todosList[index].checked ? "checked" : ""
+      }>
                     <label for="todo-${index}">${todo.title}</label>
                 </li>
                 `;
-        });
+    });
 
-      for(let i = 0; i < todosList.length; i++) {
-        document.getElementById(`todo-${i}`).addEventListener("click", () => {
-          todosList[i].checked = !todosList[i].checked;
-          console.log(todosList[i]);
-        });
-      }
-
-}
+    for (let i = 0; i < todosList.length; i++) {
+      document.getElementById(`todo-${i}`).addEventListener("click", () => {
+        todosList[i].checked = !todosList[i].checked;
+        console.log(todosList[i]);
+      });
+    }
+  }
+};
