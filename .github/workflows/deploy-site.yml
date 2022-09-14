@@ -17,6 +17,7 @@ jobs:
     needs: [install_dependencies]
     steps:
       - run: npm run build
+      
 
   deploy:
     runs-on: ubuntu-latest
