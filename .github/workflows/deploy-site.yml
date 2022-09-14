@@ -1,28 +1,21 @@
 name: deploy site
-on: 
+on:
   push:
     branches:
       - main
+  pull_request:
 jobs:
-  install_dependencies:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-      - run: npm i
-  build:
-    runs-on: ubuntu-latest
-    needs: [install_dependencies]
-    steps:
+          node-version: "16.x"
+      - name: "Install dependencies"
+        run: npm i
+      - name: "Build site"
       - run: npm run build
-      
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Run deploy script
         run: ./deploy.sh
         shell: bash
